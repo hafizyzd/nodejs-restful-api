@@ -9,7 +9,7 @@ export const removeTestUser = async () => {
     });
     // Wait a bit to ensure the deletion is complete
     await new Promise(resolve => setTimeout(resolve, 100));
-}
+};
 
 export const createTestUser = async () => {
     await prismaClient.user.create({
@@ -20,15 +20,14 @@ export const createTestUser = async () => {
             token: "null"
         }
     });
-}
-
+};
 export const getTestUser = async () => {
     return prismaClient.user.findUnique({
         where: {
             username: "test"
         }
     });
-}
+};
 
 
 export const removeAllTestContacts = async () => {
@@ -37,7 +36,7 @@ export const removeAllTestContacts = async () => {
             username: 'test'
         }
     });
-}
+};
 
 export const createTestContact = async () => {
     await prismaClient.contact.create({
@@ -49,7 +48,7 @@ export const createTestContact = async () => {
             phone: "080900000"
         }
     })
-}
+};
 
 export const getTestContact = async () => {
     return prismaClient.contact.findFirst({
@@ -57,7 +56,7 @@ export const getTestContact = async () => {
             username: 'test'
         }
     })
-}
+};
 
 export const getTestAddress = async () => {
     return prismaClient.address.findFirst({
@@ -67,4 +66,19 @@ export const getTestAddress = async () => {
             }
         }
     })
-}
+};
+
+
+export const createManyTestContacts = async () => {
+    for (let i = 0; i < 15; i++) {
+        await prismaClient.contact.create({
+            data: {
+                username: `test`,
+                first_name: `test ${i}`,
+                last_name: `test ${i}`,
+                email: `test${i}@pzn.com`,
+                phone: `080900000${i}`
+            }
+        })
+    }
+};
