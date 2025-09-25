@@ -17,7 +17,6 @@ export const createTestUser = async () => {
             username: "test",
             password: await bcrypt.hash("rahasia", 10),
             name: "test",
-            token: "null"
         }
     });
 };
@@ -82,3 +81,28 @@ export const createManyTestContacts = async () => {
         })
     }
 };
+
+export const removeAllTestAddresses = async () => {
+    await prismaClient.address.deleteMany({
+        where: {
+            contact: {
+                username: "test"
+            }
+        }
+    });
+};
+
+
+export const createTestAddress = async () => {
+    const contact = await getTestContact();
+    await prismaClient.address.create({
+        data: {
+            contact_id: contact.id,
+            street: "jalan test",
+            city: 'kota test',
+            province: 'provinsi test',
+            country: 'indonesia',
+            postal_code: '234234'
+        }
+    })
+}
