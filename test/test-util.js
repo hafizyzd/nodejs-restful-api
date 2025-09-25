@@ -106,3 +106,16 @@ export const createTestAddress = async () => {
         }
     })
 }
+
+export const tokenTest = async () => {
+    
+    const loginResult = await supertest(web)
+            .post('/api/users/login')
+            .send({
+                username: "test",
+                password: "rahasia"
+            });
+    
+    const token =  loginResult.body.data.token;
+    return token;
+}
