@@ -6,7 +6,6 @@ import { loginUserValidation } from "../validation/user-validation.js";
 import bcrypt from "bcrypt";
 import {v4 as uuid} from "uuid";
 import { updateUserValidation } from "../validation/user-validation.js";
-import { log } from "winston";
 
 const register = async (request) => {
    const user = validate(registerUserValidation, request);

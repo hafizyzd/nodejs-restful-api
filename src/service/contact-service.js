@@ -8,7 +8,14 @@ const create = async (user, request) => {
     contact.username = user.username;
 
     return prismaClient.contact.create({
-        data: contact
+        data: contact,
+        select: {
+            id: true,
+            first_name: true,
+            last_name: true,
+            email: true,
+            phone: true
+        }
     });
             
 }
